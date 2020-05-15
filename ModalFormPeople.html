@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Modal Form</title>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+    crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <script src="https://kit.fontawesome.com/02dbf893c5.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
+
+
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      font: size 17px;
+      line-height: 1.6;
+    }
+
+    .button {
+      background: coral;
+      padding: 1em 2em;
+      color: white;
+      border: 0;
+    }
+
+    .button:hover {
+      background: #333;
+    }
+
+    .modal {
+      position: fixed;
+      z-index: 1;
+      left: 0;
+      top: 0;
+      height: 100%;
+      width: 100%;
+      overflow: auto;
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    .modal-content {
+      background-color: #f4f4f4;
+      margin: 20%auto;
+      padding: 20px;
+      width: 70%;
+      box-shadow: 0 5px 8px rgba(0, 0, 0, 0.5),
+        0 7px 20px 0 rgba(0, 0, 0, 0.17);
+    }
+
+    .closeBtn {
+      color: #ccc;
+      float: right;
+      font-size: 30px;
+    }
+
+    #updateBtn {
+      margin-left: 100%;
+    }
+  </style>
+</head>
+
+<body onload="startUp()">
+  <div class="container">
+    <h1>Dhruv</h1>
+    <button class="button" id="modalBtn">
+      Click Here
+    </button>
+
+    <div class="modal" id="simplemodal">
+      <div class="modal-content">
+        <span class="closeBtn">&times;</span>
+
+        <h3 class="text-center"><b>User Profile</b></h3>
+        <!-- form -->
+        <form>
+          <!-- title -->
+          <div class="form-group row">
+            <label for="inputTitle" class="col-sm-2 col-form-label">Title</label>
+            <div class="col-sm-10">
+              <input type="Title" class="form-control" id="inputBio" placeholder="Title" />
+            </div>
+          </div>
+          <!--Bio-->
+          <div class="form-group row">
+            <label for="inputBio" class="col-sm-2 col-form-label">Bio</label>
+            <div class="col-sm-10">
+              <input type="Bio" class="form-control" id="inputBio" placeholder="Bio" />
+            </div>
+          </div>
+          <!-- Summary -->
+          <div class="form-group row">
+            <label for="inputSummary" class="col-sm-2 col-form-label">Summary</label>
+            <div class="col-sm-10">
+              <input type="Summary" class="form-control" id="inputSummary" placeholder="Summary" />
+            </div>
+          </div>
+          <!-- Headline -->
+          <div class="form-group row">
+            <label for="inputHeadline" class="col-sm-2 col-form-label">Headline</label>
+            <div class="col-sm-10">
+              <input type="Headline" class="form-control" id="inputHeadline" placeholder="Headline" />
+            </div>
+          </div>
+          <!-- Slug -->
+          <div class="form-group row">
+            <label for="inputSlug" class="col-sm-2 col-form-label">Slug</label>
+            <div class="col-sm-10">
+              <input type="Slug" class="form-control" id="inputSlug" placeholder="Slug" />
+            </div>
+          </div>
+          <!-- status -->
+          <div class="form-group row">
+            <label for="inputStatus" class="col-sm-2 col-form-label">Status</label>
+            <div class="col-sm-10">
+              <input type="Status" class="form-control" id="inputStatus" placeholder="Status" />
+            </div>
+          </div>
+          <!-- skills -->
+          <div class="form-group row">
+            <label for="inputSkills" class="col-sm-2 col-form-label">Skills</label>
+            <div class="col-sm-10">
+              <input type="Skills" class="form-control" id="inputSkills" placeholder="Skills" />
+            </div>
+          </div>
+          <div class="form-group row">
+            <form>
+              <div class="form-group">
+                <label for="exampleFormControlFile1">Primary Image</label>
+                <input type="file" class="form-control-file" id="exampleFormControlFile1" />
+              </div>
+            </form>
+          </div>
+
+          <!--  -->
+          <div class="form-group row"></div>
+          <div class="form-group row">
+            <div class="col-sm-10">
+              <button type="button" class="btn btn-outline-info" id="updateBtn">
+                Update
+              </button>
+              <!-- button -->
+            </div>
+          </div>
+        </form>
+        <!-- end form -->
+      </div>
+    </div>
+  </div>
+
+  <!--  -->
+  <script id="candidateCode">
+    function startUp() {
+      console.log("DHRUV");
+      $("#modalBtn").on("click", openModal);
+      $(".closeBtn").on("click", closeModal);
+    }
+
+    var modal = $("#simplemodal");
+    var modalBtn = $("#modalBtn");
+    var closeBtn = $(".closeBtn");
+
+    function openModal() {
+      $("#simplemodal").toggle();
+    }
+
+    function closeModal() {
+      $("#simplemodal").hide();
+    }
+  </script>
+</body>
+
+</html>

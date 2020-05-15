@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Register Page</title>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" />
+
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <script src="https://kit.fontawesome.com/02dbf893c5.js" crossorigin="anonymous"></script>
+  <script src="ajaxCalls.js"></script>
+
+  <!--  All  CSS in here -->
+  <style>
+    a.nav-link {
+      margin-left: 150px;
+
+    }
+
+    #btnsubmit {
+      margin-left: 530px;
+      margin-top: 50px;
+    }
+
+    .footer {
+      margin-top: 140px;
+    }
+  </style>
+</head>
+
+<body style="background-color: rgb(143, 159, 172);" onload="startUp()">
+
+  <!-- Navbar content -->
+
+  <nav class="navbar navbar-light" style="background-color: hsla(0, 0%, 0%, 0.733);">
+
+    <ul class="nav nav-tabs" style="background-color: hsla(0, 0%, 0%, 0.733);">
+
+      <li class="nav-item">
+        <a class="nav-link active" href="http://localhost:1932/BOARD/Login.html"><i class="fas fa-sign-in-alt"></i>
+          Login</a>
+      </li>
+
+  </nav>
+
+
+  <!-- DIV  -->
+
+  <div class="container">
+    <h1 class="text-center"><b>Register User</b></h1>
+    <div class="row">
+
+      <form id="form">
+        <div class="form-group">
+          <label for="FirstName">First Name</label>
+          <input type="text" class="form-control" id="FirstName" name="FirstName" required>
+        </div>
+        <div class="form-group">
+          <label for="LastName">Last Name</label>
+          <input type="text" class="form-control" id="LastName" name="LastName" required>
+        </div>
+        <div class="form-group">
+          <label for="exampleInputEmail1">Email address</label>
+          <input type="email" class="form-control" id="exampleInputEmail1" name="Email" aria-describedby="emailHelp" />
+          <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+        </div>
+        <div class="form-group">
+          <label for="exampleInputPassword1">Password</label>
+          <input type="password" name="Password" class="form-control" id="exampleInputPassword1" />
+        </div>
+        <div class="form-group">
+          <label for="exampleInputConfirmPassword">Confirm Password</label>
+          <input type="password" name="PasswordConfirm" class="form-control" id="exampleInputConfirmPassword" />
+        </div>
+    </div>
+    <button type="button" class="btn btn-primary" id="btnsubmit" name="button">Submit</button>
+    </form>
+
+  </div>
+  </div>
+
+  <!-- Footer -->
+
+  <footer class="container-fluid footer mx-auto">
+    <p class="text-center footer">$$ Created By Dhruv Patel $$</p>
+  </footer>
+
+  <!-- All your JavaScript code tag  -->
+  <script id="candidateCode">
+
+    function startUp() {
+      console.log("Start up working");
+      $("#btnsubmit").on("click", postData);
+    }
+
+    function postData() {
+
+      console.log("clicked....");
+
+      let data = readForm();
+
+      postDatatoDataBaseRegister(data).then(postDataSuccess).fail(postDataError)
+
+    }
+
+    function postDataSuccess() {
+      console.log("Post Success");
+      clearFormData();
+      swal("Success!", "You Did It...", "success")
+    }
+
+    function postDataError() {
+      console.log("Post Error");
+      swal("Registration Failed!", "Oops", "error")
+    }
+
+    function readForm(myData) {
+      let data = {};
+      data.FirstName = $("#FirstName").val();
+      data.LastName = $("#LastName").val();
+      data.Email = $("#exampleInputEmail1").val();
+      data.Password = $("#exampleInputPassword1").val();
+      data.PasswordConfirm = $("#exampleInputConfirmPassword").val();
+      return data;
+    }
+
+    function clearFormData() {
+      $("#FirstName").val("");
+      $("#LastName").val("");
+      $("#exampleInputEmail1").val("");
+      $("#exampleInputPassword1").val("");
+      $("#exampleInputConfirmPassword").val("");
+    }
+
+
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>People</title>
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <script src="https://kit.fontawesome.com/02dbf893c5.js" crossorigin="anonymous"></script>
+  <script src="people.js"></script>
+
+
+  <!--  All  CSS in here -->
+  <style>
+    a {
+      margin-left: 50px;
+    }
+
+    .rounded-circle {
+      margin-left: 180px;
+      margin-top: 10px;
+
+    }
+
+    .btn-outline-danger {
+      margin-left: 340px;
+
+    }
+
+    /* modal  */
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      font: size 17px;
+      line-height: 1.6;
+    }
+
+    .button {
+      background: coral;
+      padding: 1em 2em;
+      color: white;
+      border: 0;
+    }
+
+    .button:hover {
+      background: #333;
+    }
+
+    .modal {
+      position: fixed;
+      z-index: 1;
+      left: 0;
+      top: 0;
+      height: 100%;
+      width: 100%;
+      overflow: auto;
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    .modal-content {
+      background-color: #f4f4f4;
+      margin: 20%auto;
+      padding: 20px;
+      width: 70%;
+      box-shadow: 0 5px 8px rgba(0, 0, 0, 0.5),
+        0 7px 20px 0 rgba(0, 0, 0, 0.17);
+    }
+
+    .closeBtn {
+      color: #ccc;
+      float: right;
+      font-size: 30px;
+    }
+
+    #updateBtn {
+      margin-left: 100%;
+    }
+
+    /* end modal */
+  </style>
+</head>
+
+<body onload="startUp()">
+
+
+
+  <nav class="navbar navbar-light" style="background-color: hsla(0, 0%, 0%, 0.733);">
+    <ll class="nav nav-tabs">
+
+
+
+
+
+      <li class="nav-item">
+        <a class="nav-link" href="http://localhost:1932/BOARD/HomePage.html"><i class="fas fa-home"></i> Home</a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="#"><i class="fas fa-users"></i> People</a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="#"><i class="fas fa-info"></i> Jobs</a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="#"><i class="fas fa-blog"></i> Blogs</a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="#"><i class="fas fa-globe"></i> Tech Companies</a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="#"><i class="fas fa-calendar-alt"></i> Events</a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="http://localhost:1932/BOARD/Register.html"><i class="fas fa-user-edit"></i>
+          Register</a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="" id="logout"><i class="fas fa-sign-out-alt"></i> Log-Out</a>
+      </li>
+      <li class="nav-item">
+        <form class="form-inline my-2 my-lg-0">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-primary" type="submit">Search</button>
+        </form>
+      </li>
+
+  </nav>
+  <!-- ADD New People Card in The Container -->
+
+  <h1 class="text-center"><b><a class="people">People</a></b></h1>
+  <div class="row row-cols-3 addPeople"></div>
+
+  </div>
+
+  <script id="peopleTemplate" type="text/template">
+
+  <div class="card-deck">
+  
+            <div class="card h-100">
+      <img src="https://img.deusm.com/darkreading/theedge/602x250_leadership.jpg" class="rounded-circle"
+        style="width: 170px;height: 170px;" alt="...">
+      <div class="card-body">
+        <h5 class="card-title text-center">Dhruv</h5>
+        <p class="card-text text-center" id="bio">This is a wider card with supporting text below as a natural lead-in
+          to
+          additional content. This content is a little bit longer.</p>
+        <button type="button" class="btn btn-outline-primary editBtn">Edit</button>
+        <button type="button" class="btn btn-outline-danger deleteBtn">Delete</button>
+      </div>
+    </div>
+  </div>
+  </div>
+  </div>
+
+  </script>
+
+  <!-- modal -->
+  <div class="container">
+
+    <div class="modal" id="simplemodal">
+      <div class="modal-content">
+        <span class="closeBtn">&times;</span>
+
+        <h3 class="text-center"><b>User Profile</b></h3>
+        <!-- form -->
+        <form>
+          <!-- title -->
+          <div class="form-group row">
+            <label for="inputTitle" class="col-sm-2 col-form-label">Title</label>
+            <div class="col-sm-10">
+              <input type="Title" class="form-control" id="inputTitle" placeholder="Title" />
+            </div>
+          </div>
+          <!--Bio-->
+          <div class="form-group row">
+            <label for="inputBio" class="col-sm-2 col-form-label">Bio</label>
+            <div class="col-sm-10">
+              <input type="Bio" class="form-control" id="inputBio" placeholder="Bio" />
+            </div>
+          </div>
+          <!-- Summary -->
+          <div class="form-group row">
+            <label for="inputSummary" class="col-sm-2 col-form-label">Summary</label>
+            <div class="col-sm-10">
+              <input type="Summary" class="form-control" id="inputSummary" placeholder="Summary" />
+            </div>
+          </div>
+          <!-- Headline -->
+          <div class="form-group row">
+            <label for="inputHeadline" class="col-sm-2 col-form-label">Headline</label>
+            <div class="col-sm-10">
+              <input type="Headline" class="form-control" id="inputHeadline" placeholder="Headline" />
+            </div>
+          </div>
+          <!-- Slug -->
+          <div class="form-group row">
+            <label for="inputSlug" class="col-sm-2 col-form-label">Slug</label>
+            <div class="col-sm-10">
+              <input type="Slug" class="form-control" id="inputSlug" placeholder="Slug" />
+            </div>
+          </div>
+          <!-- status -->
+          <div class="form-group row">
+            <label for="inputStatusId" class="col-sm-2 col-form-label">StatusId</label>
+            <div class="col-sm-10">
+              <input type="number" class="form-control" id="inputStatusId" placeholder="Status" />
+            </div>
+          </div>
+          <!-- skills -->
+          <div class="form-group row">
+            <label for="inputSkills" class="col-sm-2 col-form-label">Skills</label>
+            <div class="col-sm-10">
+              <input type="Skills" class="form-control" id="inputSkills" placeholder="Skills" />
+            </div>
+          </div>
+          <div class="form-group row">
+            <form>
+              <div class="form-group">
+                <label for="exampleFormControlFile1">Primary Image</label>
+                <input type="file" class="form-control-file" id="exampleFormControlFile1" />
+              </div>
+            </form>
+          </div>
+
+          <!--  -->
+          <div class="form-group row"></div>
+          <div class="form-group row">
+            <div class="col-sm-10">
+              <button type="button" class="btn btn-outline-info" id="updateBtn">
+                Update
+              </button>
+              <!-- button -->
+            </div>
+          </div>
+        </form>
+        <!-- end form -->
+      </div>
+    </div>
+  </div>
+  <!-- pagination -->
+
+  <nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center">
+      <li class="page-item disabled">
+        <a class="page-link" href="#" tabindex="-1">Previous</a>
+      </li>
+      <li class="page-item"><a class="page-link" href="#">1</a></li>
+      <li class="page-item"><a class="page-link" href="#">2</a></li>
+      <li class="page-item"><a class="page-link" href="#">3</a></li>
+      <li class="page-item">
+        <a class="page-link" href="#">Next</a>
+      </li>
+    </ul>
+  </nav>
+
+
+  <!-- Footer -->
+
+  <footer class="container-fluid footer mx-auto">
+    <p class="text-center">$$ Created By Dhruv Patel $$</p>
+  </footer>
+
+  <!-- All your JavaScript code tag  -->
+  <script id="candidateCode">
+    var id;
+    function startUp() {
+      console.log("Start up working");
+      getAllPeople();
+      $(".people").on("click", openModal);
+      $(".addPeople").on("click", ".editBtn", openModal);
+      $(".addPeople").on("click", ".editBtn", editData);
+      $(".closeBtn").on("click", closeModal);
+      $("#updateBtn").on("click", handleUpdate);
+      $(".addPeople").on("click", ".deleteBtn", readModalForDelete);
+
+    }
+
+    function getAllPeople() {
+      console.log("GETALLPEOPLE");
+
+      services.authors.getPeople().then(onGetPeopleSuccess).fail(onGetPeopleError)
+    }
+
+    var onGetPeopleSuccess = (data) => {
+
+      console.log(data, "dhruv123");
+      editData(data);
+
+      clonePeopleCard(data.item.pagedItems);
+
+
+
+    }
+
+    var onGetPeopleError = () => {
+      console.log("GET PEOPLE ERROR")
+    }
+
+    var cloneTemplet = () => {
+      var newClone = $($("#peopleTemplate").html()).clone();
+
+      return newClone;
+    }
+
+    var clonePeopleCard = (data) => {
+      for (let index = 0; index < data.length; index++) {
+        let newPeople = cloneTemplet(data);
+        newPeople.find(".text-center").text(data[index].title);
+        newPeople.find("#bio").text(data[index].bio);
+        newPeople.find(".rounded-circle").attr("src", data[index].primaryImage.imageUrl);
+        newPeople.attr("id", data[index].id);
+        $(".addPeople").append(newPeople);
+
+
+      }
+    }
+
+    function openModal() {
+      $("#simplemodal").toggle();
+    }
+
+    function closeModal() {
+      $("#simplemodal").hide();
+    }
+
+    function readFormModal() {
+      let data = {};
+
+      data.title = $("#inputTitle").val();
+      data.bio = $("#inputBio").val();
+      data.summary = $("#inputSummary").val();
+      data.headline = $("#inputHeadline").val();
+      data.slug = $("#inputSlug").val();
+      data.statusId = $("#inputStatusId").val();
+      data.skills = $("#inputSkills").val();
+      data.primaryImage = $("#exampleFormControlFile1").val();
+
+
+      return data;
+    };
+
+    function handleUpdate(params) {
+      var data = readFormModal();
+
+      if (id) {
+        data.id = parseInt(id);
+        services.authors.editModalData(id, data).then(editModalSuccess).fail(editModalError);
+
+      } else {
+        services.authors.postModaldata(data).then(postModalSuccess).fail(postModalError);
+
+      }
+      console.log(data);
+    }
+
+
+
+    function postModalSuccess() {
+      console.log("Success on Post Modal")
+      swal("Data Added Successfull", "", "success")
+    }
+
+    function postModalError() {
+      console.log("Error on Post Modal")
+      swal("Data  Error!", "Please try again", "error")
+    }
+
+
+    function editData(data) {
+
+      var perentEliment = $(this).closest(".card-deck");
+
+      currentId = perentEliment.attr("id"),
+
+        id = currentId;
+
+      console.log(data.item, "dhruv1221212121");
+    }
+
+    function editModalSuccess(params) {
+      console.log("Edit Success");
+      swal("Edit Successfull", "", "success")
+    }
+
+    function editModalError(params) {
+      console.log("Edit Error");
+
+      swal("Edit Error!", "Please try again", "error")
+    }
+
+    function readModalForDelete(params) {
+      console.log("dhruv")
+      let deleteData = JSON.stringify([{
+        "bio": "Mr. Bean Mr. Bean Mr. Bean Mr. Bean Mr. Bean Mr. Bean Mr. Bean Mr. Bean Mr. Bean Mr. Bean Mr. Bean Mr. Bean Mr. Bean Mr. Bean Mr. Bean Mr. Bean Mr. Bean Mr. Bean Mr. Bean Mr. Bean Mr. Bean Mr. Bean Mr. Bean Mr. Bean Mr. Bean Mr. Bean Mr. Bean Mr. Bean Mr. Bean Mr. Bean Mr. Bean Mr. Bean Mr. Bean Mr. Bean Mr. Bean",
+        "title": "Mr. Bean",
+        "summary": "Mr. Bean Mr. Bean Mr. Bean Mr. Bean Mr. Bean",
+        "headline": "Mr. Bean Mr. Bean Mr. Bean Mr. Bean Mr. Bean",
+        "slug": "http://themrbean.com",
+        "statusId": 2,
+        "skills": null,
+        "primaryImage": { "imageUrl": "https://i.pravatar.cc/200?img=11" }
+      }]);
+
+      services.authors.editModalData(id, deleteData).then(deleteSuccess).fail(deleteError);
+    }
+
+    function deleteSuccess() {
+      console.log("success on Delete");
+    }
+
+    function deleteError() {
+      console.log("Error on Delete")
+    }
+  </script>
+</body>
+
+</html>

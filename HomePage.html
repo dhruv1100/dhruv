@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Home Page</title>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" />
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <script src="https://kit.fontawesome.com/02dbf893c5.js" crossorigin="anonymous"></script>
+  <script src="ajaxCalls.js"></script>
+
+  <!--  All  CSS in here -->
+  <style>
+    a {
+      margin-left: 60px;
+    }
+
+    #Hello {
+      color: rgb(224, 194, 24);
+
+    }
+
+    footer {
+      margin-top: 750px;
+    }
+  </style>
+</head>
+
+<body style="background-color: white;" onload="startUp()">
+
+
+  <!-- Navbar content -->
+
+  <nav class="navbar navbar-light" style="background-color: hsla(0, 0%, 0%, 0.733);">
+    <ll class="nav nav-tabs" style="background-color: hsla(0, 0%, 0%, 0.733);">
+
+      <li class="nav-item">
+        <a class="nav-link active" href="#" id="Hello"></a>
+      </li>
+
+
+      <li class="nav-item">
+        <a class="nav-link active" href="http://localhost:1932/BOARD/HomePage.html"><i class="fas fa-home"></i> Home</a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="http://localhost:1932/BOARD/People.html"><i class="fas fa-users"></i> People</a>
+      </li>
+
+
+
+      <li class="nav-item">
+        <a class="nav-link" href="http://localhost:1932/BOARD/Blogs.html"><i class="fas fa-blog"></i> Blogs</a>
+      </li>
+
+
+
+      <li class="nav-item">
+        <a class="nav-link" href="http://localhost:1932/BOARD/Login.html"><i class="fas fa-user-edit"></i>
+          Login</a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" id="logout"><i class="fas fa-sign-out-alt"></i> Log-Out</a>
+      </li>
+
+
+  </nav>
+
+
+  <!-- DIV  -->
+
+  <div class="container">
+    <h1 class="text-center"><b id="welcome"></b></h1>
+    <h3 class="text-center"><b id="welcome1"></b></h3>
+
+    <div class="row"></div>
+  </div>
+
+  <!-- Footer -->
+
+  <footer class="container-fluid footer mx-auto">
+    <p class="text-center">$$ Created By Dhruv Patel $$</p>
+  </footer>
+
+  <!-- All your JavaScript -->
+  <script id="candidateCode">
+    function startUp() {
+      console.log("Start up working");
+      getAllAuth();
+      $("#logout").on("click", logOutAll);
+
+    }
+
+    function getAllAuth() {
+      console.log("GET ALL AUTH");
+      getAuth().then(successAuth).fail(errorAuth);
+
+    }
+
+    function getUserName(userName) {
+      console.log(userName.name);
+      $("#welcome").text("WellCome  " + userName.name);
+      $("#welcome1").text("SiteId  " + userName.siteId);
+
+      $("#Hello").text("Hello," + userName.name);
+    }
+
+    function successAuth(data) {
+      console.log("Success on Auth");
+      console.log(data);
+      console.log(data.item.user);
+      getUserName(data.item.user);
+
+    }
+
+    function errorAuth() {
+      console.log("Error on Auth");
+    };
+
+    function logOutAll() {
+      console.log("LOG OUT");
+      logOutUsers().then(successLogOut).fail(errorLogOut);
+    }
+
+    function successLogOut() {
+      swal("LogOut Successfull", "Please Login again", "success");
+      console.log("Success on LOGOUT");
+
+      window.location = "http://localhost:1932/BOARD/Login.html"
+    }
+
+    function errorLogOut() {
+      console.log("Error on LOGOUT");
+      swal("LogOut Failed!", "Please try again", "error")
+    };
+
+  </script>
+</body>
+
+</html>

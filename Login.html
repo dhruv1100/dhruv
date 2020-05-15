@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Login Page</title>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" />
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <script src="https://kit.fontawesome.com/02dbf893c5.js" crossorigin="anonymous"></script>
+  <script src="ajaxCalls.js"></script>
+
+  <!--  All  CSS in here -->
+  <style>
+    h1 {
+      color: white;
+
+    }
+
+    form {
+      max-width: 300px;
+
+      margin-left: 450px;
+    }
+
+    button {
+      margin-left: 550px;
+      margin-top: 50px;
+    }
+
+    footer {
+      margin-top: 440px;
+    }
+
+    #abc {
+      margin-left: 540px;
+    }
+
+    #nd {
+      margin-left: 30px;
+      margin-top: 30px;
+    }
+  </style>
+</head>
+
+<body style="background-color: rgb(143, 159, 172);" onload="startUp()">
+
+  <!-- Navbar content -->
+
+  <nav class="navbar navbar-light" style="background-color: hsla(0, 0%, 0%, 0.733);">
+
+    <ul class="nav nav-tabs" style="background-color: hsla(0, 0%, 0%, 0.733);">
+
+      <li class="nav-item">
+        <a class="nav-link active" href="#"><i class="fas fa-home"></i> Home</a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="#"><i class="fas fa-users"></i> User</a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="#"><i class="fas fa-info"></i> Info</a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="#"><i class="fas fa-blog"></i> Blog</a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="#"><i class="fas fa-globe"></i> Tech Companies</a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="#"><i class="fas fa-calendar-alt"></i> Events</a>
+      </li>
+
+
+  </nav>
+
+
+  <!-- DIV  -->
+
+  <div class="container">
+
+    <div class="row">
+
+      <form id="form">
+
+
+        <div class="form-group">
+          <h1 class="text-center" style="background-color:hsla(0, 0%, 0%, 0.733);"><b>Welcome</b></h1>
+          <p class="text-center">Please Sign In To Continue</p>
+          <label for="exampleInputEmail1"></label>
+          <input type="email" class="form-control" id="exampleInputEmail1" name="Email" aria-describedby="emailHelp"
+            placeholder="Enter email" />
+          <i class="fas fa-envelope" id="femail"></i>
+          <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+        </div>
+        <div class="form-group">
+          <label for="exampleInputPassword1"></label>
+          <input type="password" name="Password" class="form-control" id="exampleInputPassword1"
+            placeholder="Password" />
+        </div>
+
+
+    </div>
+    <button type="button" class="btn btn-primary" id="btnsubmit" name="button">Submit</button>
+    </form>
+    <p class="text-center" id="nd">Need to Signup?</p>
+    <a class="text-center" href="http://localhost:1932/BOARD/Register.html" id="abc"> Register Now</a>
+  </div>
+  </div>
+
+  <!-- Footer -->
+
+  <footer class="container-fluid footer mx-auto">
+    <p class="text-center">$$ Created By Dhruv Patel $$</p>
+  </footer>
+
+  <!-- All your JavaScript code tag  -->
+
+
+  <script id="candidateCode">
+
+    function startUp() {
+      console.log("Start up working");
+      $("#btnsubmit").on("click", postData);
+
+    }
+
+    function postData() {
+      console.log("clicked....");
+      postDatatoDataBase().then(postDataSuccess).fail(postDataError)
+
+    }
+
+    function postDataSuccess() {
+      console.log("Post Success");
+      clearFormData();
+      swal("Login Successfull", "", "success")
+      window.location = "http://localhost:1932/BOARD/HomePage.html";
+    }
+
+    function postDataError() {
+      console.log("Post Error");
+      swal("Login Failed!", "Please try again", "error")
+    }
+
+    function clearFormData() {
+      $("#exampleInputEmail1").val("");
+      $("#exampleInputPassword1").val("");
+    }
+
+
+  </script>
+</body>
+
+</html>

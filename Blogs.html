@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Blogs</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://kit.fontawesome.com/02dbf893c5.js" crossorigin="anonymous"></script>
+    <script src="blogs.js"></script>
+
+
+    <!--  All  CSS in here -->
+    <style>
+        a {
+            margin-left: 50px;
+        }
+
+        .rounded-circle {
+            margin-left: 180px;
+            margin-top: 10px;
+
+        }
+
+        .btn-outline-danger {
+            margin-left: 340px;
+
+        }
+
+        .plus {
+            margin-left: 120px;
+        }
+
+        .btnEditBlog {
+            margin-left: 140px;
+            margin-top: 10px;
+        }
+
+        .btnView {
+            margin-top: 10px;
+        }
+
+        /* modal  */
+
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            font: size 17px;
+            line-height: 1.6;
+        }
+
+        .button {
+            background: coral;
+            padding: 1em 2em;
+            color: white;
+            border: 0;
+        }
+
+        .button:hover {
+            background: #333;
+        }
+
+        .modal {
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-content {
+            background-color: #f4f4f4;
+            margin: 20%auto;
+            padding: 20px;
+            width: 70%;
+            box-shadow: 0 5px 8px rgba(0, 0, 0, 0.5),
+                0 7px 20px 0 rgba(0, 0, 0, 0.17);
+        }
+
+        .closeBtn {
+            color: #ccc;
+            float: right;
+            font-size: 30px;
+        }
+
+        #updateBtn {
+            margin-left: 100%;
+        }
+
+        /* end modal */
+    </style>
+</head>
+
+<body onload="startUp()">
+
+
+    <!-- nav bar -->
+    <nav class="navbar navbar-light" style="background-color: hsla(0, 0%, 0%, 0.733);">
+        <ll class="nav nav-tabs">
+
+
+
+
+            <li class="nav-item">
+                <a class="nav-link" href="http://localhost:1932/BOARD/HomePage.html"><i class="fas fa-home"></i>
+                    Home</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="#"><i class="fas fa-users"></i> People</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="#"><i class="fas fa-info"></i> Jobs</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="#"><i class="fas fa-blog"></i> Blogs</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="#"><i class="fas fa-globe"></i> Tech Companies</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="#"><i class="fas fa-calendar-alt"></i> Events</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="http://localhost:1932/BOARD/Register.html"><i class="fas fa-user-edit"></i>
+                    Register</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="" id="logout"><i class="fas fa-sign-out-alt"></i> Log-Out</a>
+            </li>
+            <li class="nav-item">
+                <form class="form-inline my-2 my-lg-0">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-primary" type="submit">Search</button>
+                </form>
+            </li>
+
+    </nav>
+    <!-- end navbar  -->
+    <!-- ADD New People Card in The Container -->
+
+    <h1 class="text-center"><b>Blogs</b></h1>
+    <!-- main card for blogs -->
+    <template class="mainblog">
+        <div class="row">
+
+            <div class="card">
+
+                <div class="card-body">
+                    <h5 class="card-title">Special travel blog</h5>
+                    <p class="card-text">Travel blogs have a huge potential for driving a lot of traffic and making
+                        money. People love traveling, and they’ll always look for new opportunities to go someplace
+                        they’ve never been before and explore new cultures.
+
+                        You can take lots of directions with your travel blog. You can run a region-specific blog,
+                        food
+                        travel blog, or a personal travel blog filled with your own exciting adventures and travel
+                        guides.
+
+                        Your blog can also focus on hotel or restaurant reviews, or travel gear so that you can earn
+                        money from affiliate links. The niche is huge, so there’s a lot of stuff you can focus on
+                        here.
+                    </p>
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSztEcgZ41UtSV-tXGZXjgFBnfoDjmNFWKTIVs_yX97iCptbWe5ag&s"
+                        class="card-img-top" alt="..." />
+                    <button type="button" class="btn btn-outline-dark btnView">ViewMore</button>
+                    <button type="button" class="btn btn-outline-info btnEditBlog">Edit Blog</button>
+
+
+                </div>
+            </div>
+        </div>
+
+
+    </template>
+
+    <!-- end main card -->
+    <!-- add to this container -->
+    <div class="container">
+        <div class="row" id="newBlogs">
+            <div class="col-sm-8"></div>
+
+            <div class="col-sm-4 smallcard-body" id="">
+                <h5 class="text-center"><b>Travel blogs</b></h5>
+                <!-- pagination -->
+
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination">
+                        <li class="page-item">
+                            <a class="page-link" href="#" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                        <li class="page-item"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item">
+                            <a class="page-link" href="#" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                        <a><i class="fas fa-plus fa-2x plus"></i></a>
+
+                    </ul>
+
+                </nav>
+                <!-- end pagination -->
+
+
+            </div>
+
+        </div>
+    </div>
+
+
+
+    <!-- modal -->
+    <div class="container">
+
+        <!-- modal  -->
+        <div class="modal" id="simplemodal">
+            <div class="modal-content">
+                <span class="closeBtn">&times;</span>
+
+                <h3 class="text-center"><b>User Profile</b></h3>
+                <!-- form -->
+                <form>
+                    <!-- title -->
+                    <div class="form-group row dashed" style="height: 60px;">
+                        <label for="inputTitle" class="col-sm-2 col-form-label">Title</label>
+                        <div class="col-sm-10">
+                            <input type="Title" class="form-control" id="inputTitle" placeholder="Title" />
+                        </div>
+                    </div>
+                    <!--Bio-->
+                    <div class="form-group row">
+                        <label for="inputshortTitle" class="col-sm-2 col-form-label">Short Title</label>
+                        <div class="col-sm-10">
+                            <input type="ShortTitle" class="form-control" id="ShortTitle" placeholder="Short Title" />
+                        </div>
+                    </div>
+                    <!-- Summary -->
+                    <div class="form-group row">
+                        <label for="inputSummary" class="col-sm-2 col-form-label">Content</label>
+                        <div class="col-sm-10">
+                            <input type="Content" class="form-control" id="inputContent" placeholder="Content" />
+                        </div>
+                    </div>
+                    <!-- Headline -->
+                    <div class="form-group row">
+                        <label for="inputHeadline" class="col-sm-2 col-form-label">Short Description</label>
+                        <div class="col-sm-10">
+                            <input type="Short Description" class="form-control" id="inputShortDescription"
+                                placeholder="Short Description" />
+                        </div>
+                    </div>
+                    <!-- Slug -->
+                    <div class="form-group row">
+                        <label for="inputSlug" class="col-sm-2 col-form-label">Slug</label>
+                        <div class="col-sm-10">
+                            <input type="Slug" class="form-control" id="inputSlug" placeholder="Slug" />
+                        </div>
+                    </div>
+                    <!-- date -->
+                    <div class="form-group row">
+
+                        <div class="col-md-3 mb-3"><label style="margin-left: 100px;">Date</label>
+                            <input type="date" class="form-control" id="inputDate" />
+                        </div>
+                        <div class="col-md-3 mb-3"><label style="margin-left: 100px;">Section</label>
+                            <input type="section" class="form-control" id="inputSection" />
+                        </div>
+                        <div class="col-md-3 mb-3"><label style="margin-left: 100px;">Status</label>
+                            <input type="status" class="form-control" id="inputStatus" />
+                        </div>
+                        <div class="col-md-3 mb-3"><label style="margin-left: 100px;">Tags</label>
+                            <input type="tags" class="form-control" id="inputtags" />
+                        </div>
+                    </div>
+
+
+                    <!-- primary img -->
+                    <div class="form-group row">
+                        <form>
+                            <div class="form-group">
+                                <label for="exampleFormControlFile1">Primary Image</label>
+                                <input type="file" class="form-control-file" id="exampleFormControlFile1" />
+                            </div>
+                        </form>
+                    </div>
+
+                    <!--  -->
+                    <div class="form-group row"></div>
+                    <div class="form-group row">
+                        <div class="col-sm-10">
+                            <button type="button" class="btn btn-outline-info" id="updateBtn">
+                                Update
+                            </button>
+                            <!-- button -->
+                        </div>
+                    </div>
+                </form>
+                <!-- end form -->
+            </div>
+        </div>
+    </div>
+    <!-- pagination -->
+
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+            <li class="page-item disabled">
+                <a class="page-link" href="#" tabindex="-1">Previous</a>
+            </li>
+            <li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item">
+                <a class="page-link" href="#">Next</a>
+            </li>
+        </ul>
+    </nav>
+
+
+    <!-- Footer -->
+
+    <footer class="container-fluid footer mx-auto">
+        <p class="text-center">$$ Created By Dhruv Patel $$</p>
+    </footer>
+
+    <!-- All your JavaScript code tag  -->
+    <script id="candidateCode">
+        function startUp() {
+            console.log("Start up")
+            $(".fa-plus").on("click", openModal);
+            $(".closeBtn").on("click", closeModal);
+            getAllBlogs();
+        }
+
+        function openModal() {
+            $("#simplemodal").toggle();
+        }
+
+        function closeModal() {
+            $("#simplemodal").hide();
+        }
+
+        function getAllBlogs() {
+            getblogs().then(getBlogsuccess).fail(getBlogError);
+        }
+
+        function getBlogsuccess(data) {
+            console.log("Success on get Blogs");
+            // console.log(data);
+            console.log(data.item.pagedItems);
+            cloneData(data.item.pagedItems);
+        }
+
+        function getBlogError() {
+            console.log("Error on get Blogs")
+        }
+
+        function getTemplate() {
+            var newClone = $($(".mainblog").html()).clone();
+
+
+            return newClone;
+        }
+
+        function cloneData(data) {
+            for (let i = 0; i < data.length; i++) {
+                const clone = getTemplate(data);
+                clone.find(".card-title").text(data[i].title);
+                clone.find(".card-text").text(data[i].content);
+                clone.find(".card-img-top").attr("src", data[i].images[0].imageUrl);
+                clone.attr("id", data[i].id);
+                $(".smallcard-body").append(clone);
+            }
+
+        }
+
+        function addBlogData(params) {
+            addBlogs().then(addBlogSuccess).fail(addBlogError);
+        }
+
+        function addBlogSuccess() {
+            console.log("BLOG ADD SUCCESS");
+        }
+
+        function addBlogError() {
+            console.log("ERROR ON ADDING BLOG");
+        }
+
+
+    </script>
+</body>
+
+</html>
